@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using Azure_Blobs_FileManager.ViewModels;
 
 namespace Azure_Blobs_FileManager
 {
@@ -10,10 +11,13 @@ namespace Azure_Blobs_FileManager
     public partial class MainWindow : Window
     {
         private static MainWindow? _window;
+        private FileManagerViewModel _viewModel;
         public MainWindow()
         {
             InitializeComponent();
             _window = this;
+            _viewModel = new FileManagerViewModel();
+            this.DataContext = _viewModel;
         }
 
         private void DragWindow(object sender, RoutedEventArgs e)

@@ -28,7 +28,7 @@
                     <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
                 <Image  Grid.Column="0" Source="/Resource/D1.png" RenderOptions.BitmapScalingMode="Fant" Margin="1"/>
-                <TextBlock  Grid.Column="1" ToolTip="Добрый День." Text="File Manager" Style="{DynamicResource MainTextBlock}"/>
+                <TextBlock  Grid.Column="1" Text="File Manager" Style="{DynamicResource MainTextBlock}"/>
                 <Button Grid.Column="2" x:Name="MinimizeButton" Style="{StaticResource MinimizeButton}" ToolTip="Свернуть." Click="MinimizeWindow"/>
                 <Button Grid.Column="3" x:Name="CloseButton" Style="{StaticResource CloseButton}" ToolTip="Закрыть." Click="CloseWindow"/>
             </Grid>
@@ -74,7 +74,7 @@
                                 <Border Grid.Row="0" Style="{DynamicResource ZoningBorder}" BorderThickness="0, 0, 0, 1">
                                     <TextBlock Text="File list" Style="{DynamicResource MainTextBlock}"></TextBlock>
                                 </Border>
-                                <ListBox Grid.Row="1" Style="{DynamicResource FileListBox}"></ListBox>
+                                <ListBox Grid.Row="1" ItemsSource="{Binding BlobFileListCollection}" Style="{DynamicResource FileListBox}"></ListBox>
                             </Grid>
                             <Border Grid.Column="1" Style="{DynamicResource ZoningBorder}" BorderThickness="1 0 0 0">
                                 <Grid>
