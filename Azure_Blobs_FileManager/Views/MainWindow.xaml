@@ -27,16 +27,72 @@
                     <ColumnDefinition Width="30"/>
                     <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
-
                 <Image  Grid.Column="0" Source="/Resource/D1.png" RenderOptions.BitmapScalingMode="Fant" Margin="1"/>
-                <Label  Grid.Column="1" ToolTip="Добрый День." Content="File Manager"/>
+                <TextBlock  Grid.Column="1" ToolTip="Добрый День." Text="File Manager" Style="{DynamicResource MainTextBlock}"/>
                 <Button Grid.Column="2" x:Name="MinimizeButton" Style="{StaticResource MinimizeButton}" ToolTip="Свернуть." Click="MinimizeWindow"/>
                 <Button Grid.Column="3" x:Name="CloseButton" Style="{StaticResource CloseButton}" ToolTip="Закрыть." Click="CloseWindow"/>
             </Grid>
             <!--#endregion-->
 
             <!--#region Main Grid -->
+            <Border Grid.Row="1" Style="{DynamicResource ZoningBorder}" BorderThickness="0, 1, 0, 0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
+                    <!--#region Left Buttons Block -->
+                    <Border Grid.Column="0" Style="{DynamicResource ZoningBorder}" BorderThickness="0, 0, 1, 0">
+                        <StackPanel Style="{DynamicResource RightMenuStackPanel}">
+                            <TextBox Style="{DynamicResource InputTextBox}"></TextBox>
+                            <Button x:Name="SearchButton" Command="{Binding SearchButton}" Style="{DynamicResource MenuButton}">Search</Button>
+                            <Button x:Name="DownloadButton" Command="{Binding DownloadButton}" Style="{DynamicResource MenuButton}">Download</Button>
+                            <Button x:Name="UploadButton" Command="{Binding UploadButton}" Style="{DynamicResource MenuButton}">Upload</Button>
+                            <Button x:Name="DeleteButton" Command="{Binding DeleteButton}" Style="{DynamicResource MenuButton}">Delete</Button>
+                            <Button x:Name="ShowAllButton" Command="{Binding ShowAllButton}" Style="{DynamicResource MenuButton}">Show all</Button>
+                            <Button x:Name="ShowInnerButton" Command="{Binding ShowInnerButton}" Style="{DynamicResource MenuButton}">Show inner</Button>
+                        </StackPanel>
+                    </Border>
+                    <!--#endregion-->
+                    <!--#region Right Block -->
+                    <Grid Grid.Column="1">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="../Resource/abrakadabra2.png" Opacity="0.2"/>
+                        </Grid.Background>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.06*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Style="{DynamicResource ZoningBorder}" BorderThickness="0, 0, 0, 1">
+                                    <TextBlock Text="File list" Style="{DynamicResource MainTextBlock}"></TextBlock>
+                                </Border>
+                                <ListBox Grid.Row="1" Style="{DynamicResource FileListBox}"></ListBox>
+                            </Grid>
+                            <Border Grid.Column="1" Style="{DynamicResource ZoningBorder}" BorderThickness="1 0 0 0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.06*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Style="{DynamicResource ZoningBorder}" BorderThickness="0, 0, 0, 1">
+                                        <TextBlock Text="Text inner file" Style="{DynamicResource MainTextBlock}"></TextBlock>
+                                    </Border>
+                                    <TextBlock Grid.Row="1" Style="{DynamicResource MainTextBlock}" VerticalAlignment="Top" Margin="0 10 0 0"></TextBlock>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <!--#endregion-->
+                </Grid>
+            </Border>
             <!--#endregion-->
         </Grid>
     </Border>
