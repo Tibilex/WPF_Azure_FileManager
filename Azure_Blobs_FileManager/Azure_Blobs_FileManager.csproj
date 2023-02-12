@@ -7,4 +7,30 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resource\abrakadabra2.png" />
+    <None Remove="Resource\Close.png" />
+    <None Remove="Resource\CloseGray.png" />
+    <None Remove="Resource\D1.ico" />
+    <None Remove="Resource\D1.png" />
+    <None Remove="Resource\Minimize.png" />
+    <None Remove="Resource\MinimizeGray.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\abrakadabra2.png" />
+    <Resource Include="Resource\Close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\CloseGray.png" />
+    <Resource Include="Resource\D1.ico" />
+    <Resource Include="Resource\D1.png" />
+    <Resource Include="Resource\Minimize.png" />
+    <Resource Include="Resource\MinimizeGray.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Fonts\" />
+  </ItemGroup>
+
 </Project>

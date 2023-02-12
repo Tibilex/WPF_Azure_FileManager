@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Azure_Blobs_FileManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" 
+        Height="650" 
+        Width="1000" 
+        WindowStyle="None" 
+        ResizeMode="NoResize"
+        Icon="../Resource/D1.ico"
+        >
+    <Border Style="{DynamicResource ZoningBorder}">
+        <Grid MouseDown="DragWindow" Style="{DynamicResource MainGrid}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--#region Header Grid -->
+            <Grid Grid.Row="0"  x:Name="Header">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+
+                <Image  Grid.Column="0" Source="/Resource/D1.png" RenderOptions.BitmapScalingMode="Fant" Margin="1"/>
+                <Label  Grid.Column="1" ToolTip="Добрый День." Content="File Manager"/>
+                <Button Grid.Column="2" x:Name="MinimizeButton" Style="{StaticResource MinimizeButton}" ToolTip="Свернуть." Click="MinimizeWindow"/>
+                <Button Grid.Column="3" x:Name="CloseButton" Style="{StaticResource CloseButton}" ToolTip="Закрыть." Click="CloseWindow"/>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region Main Grid -->
+
+            <!--#endregion-->
+        </Grid>
+    </Border>
 </Window>
