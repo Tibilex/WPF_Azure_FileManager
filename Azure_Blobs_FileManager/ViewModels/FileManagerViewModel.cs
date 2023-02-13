@@ -16,24 +16,32 @@ namespace Azure_Blobs_FileManager.ViewModels
         #region Fields
 
         private FileManagerModel _manager;
-        private CloudBlobClient _backupBlobClient;
-        private CloudBlobContainer _backupContainer;
-        private BlobServiceClient _blobServiceClient;
-        private BlobContainerClient _blobContainerClient;
-        private BlobContainerClient _container;
-        private ObservableCollection<string> _blobListFiles;
 
         #endregion
 
         #region Properties
 
-        public ObservableCollection<string> BlobFileListCollection
+        public ReadOnlyObservableCollection<string> BlobFileListCollection
         {
-            get => _blobListFiles;
+            get
+            {
+                return _manager._filesCollection;
+                OnPropertyChanged("BlobFileListCollection");
+            }
+        }
+
+        public string ListBoxSelectedItem
+        {
+            set => _manager.FileSelectedItem = value;
+        }
+
+        public string RequestResult
+        {
+            get => _manager.RequestResult;
             set
             {
-                _blobListFiles = value;
-                OnPropertyChanged("BlobFileListCollection");
+                _manager.RequestResult = value;
+                OnPropertyChanged("RequestResult");
             }
         }
 
@@ -42,6 +50,11 @@ namespace Azure_Blobs_FileManager.ViewModels
         #region Commands
 
         public CommandResult ShowAllButton { get; private set; }
+        public CommandResult UploadFileButton { get; private set; }
+        public CommandResult DeleteFileButton { get; private set; }
+        public CommandResult DownloadFileButton { get; private set; }
+        public CommandResult ShowInnerButton { get; private set; }
+        public CommandResult SearchButton { get; private set; }
 
         #endregion
 
@@ -49,13 +62,6 @@ namespace Azure_Blobs_FileManager.ViewModels
         public FileManagerViewModel()
         {
             _manager = new ();
-            _backupBlobClient = CloudStorageAccount.Parse(_manager.ConnectionString).CreateCloudBlobClient();
-            _backupContainer = _backupBlobClient.GetContainerReference(_manager.BlobContainerName);
-            _blobServiceClient = new (_manager.ConnectionString);
-            _blobContainerClient = _blobServiceClient.GetBlobContainerClient("FileUpload");
-            _container = new(_manager.ConnectionString, _manager.BlobContainerName);
-            _blobListFiles = new();
-
             CommandsLoad();
         }
 
@@ -63,20 +69,11 @@ namespace Azure_Blobs_FileManager.ViewModels
 
         private void CommandsLoad()
         {
-            ShowAllButton = new CommandResult(ShowAllFiles);
+            ShowAllButton = new CommandResult(_manager.GetAllFiles);
+            UploadFileButton = new CommandResult(_manager.UploadFile);
+            DeleteFileButton = new CommandResult(_manager.DeleteFile);
+            DownloadFileButton = new CommandResult(_manager.DownloadFile);
         }
-
-        private void ShowAllFiles()
-        {
-            List<string> listBlobsNames = _backupContainer.ListBlobs().OfType<CloudBlockBlob>().Select(blob => blob.Name).ToList();
-            _manager.GetAllFiles(listBlobsNames);
-            foreach (string item in _manager.GetAllFiles(listBlobsNames))
-            {
-                _blobListFiles.Add(item);
-            }
-        }
-
-
 
         #endregion
     }

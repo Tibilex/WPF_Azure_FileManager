@@ -47,11 +47,12 @@
                         <StackPanel Style="{DynamicResource RightMenuStackPanel}">
                             <TextBox Style="{DynamicResource InputTextBox}"></TextBox>
                             <Button x:Name="SearchButton" Command="{Binding SearchButton}" Style="{DynamicResource MenuButton}">Search</Button>
-                            <Button x:Name="DownloadButton" Command="{Binding DownloadButton}" Style="{DynamicResource MenuButton}">Download</Button>
-                            <Button x:Name="UploadButton" Command="{Binding UploadButton}" Style="{DynamicResource MenuButton}">Upload</Button>
-                            <Button x:Name="DeleteButton" Command="{Binding DeleteButton}" Style="{DynamicResource MenuButton}">Delete</Button>
+                            <Button x:Name="DownloadButton" Command="{Binding DownloadFileButton}" Style="{DynamicResource MenuButton}">Download</Button>
+                            <Button x:Name="UploadButton" Command="{Binding UploadFileButton}" Style="{DynamicResource MenuButton}">Upload</Button>
+                            <Button x:Name="DeleteButton" Command="{Binding DeleteFileButton}" Style="{DynamicResource MenuButton}">Delete</Button>
                             <Button x:Name="ShowAllButton" Command="{Binding ShowAllButton}" Style="{DynamicResource MenuButton}">Show all</Button>
                             <Button x:Name="ShowInnerButton" Command="{Binding ShowInnerButton}" Style="{DynamicResource MenuButton}">Show inner</Button>
+                            <TextBlock Style="{DynamicResource MainTextBlock}" Text="{Binding RequestResult}" Foreground="{DynamicResource Color.Red}"></TextBlock>
                         </StackPanel>
                     </Border>
                     <!--#endregion-->
@@ -74,7 +75,7 @@
                                 <Border Grid.Row="0" Style="{DynamicResource ZoningBorder}" BorderThickness="0, 0, 0, 1">
                                     <TextBlock Text="File list" Style="{DynamicResource MainTextBlock}"></TextBlock>
                                 </Border>
-                                <ListBox Grid.Row="1" ItemsSource="{Binding BlobFileListCollection}" Style="{DynamicResource FileListBox}"></ListBox>
+                                <ListBox Grid.Row="1" x:Name="ListBox" SelectionChanged="ListBox_OnSelectionChanged" ItemsSource="{Binding BlobFileListCollection}" Style="{DynamicResource FileListBox}"></ListBox>
                             </Grid>
                             <Border Grid.Column="1" Style="{DynamicResource ZoningBorder}" BorderThickness="1 0 0 0">
                                 <Grid>

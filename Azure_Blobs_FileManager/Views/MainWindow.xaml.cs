@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Azure_Blobs_FileManager.ViewModels;
 
@@ -12,6 +14,7 @@ namespace Azure_Blobs_FileManager
     {
         private static MainWindow? _window;
         private FileManagerViewModel _viewModel;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +39,12 @@ namespace Azure_Blobs_FileManager
         private void MinimizeWindow(object sender, EventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void ListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            _viewModel.ListBoxSelectedItem = ListBox.SelectedItem.ToString();
         }
     }
 }
