@@ -46,7 +46,7 @@ xmlns:viewmodels="clr-namespace:Azure_Blobs_FileManager.ViewModels" d:DataContex
                     <!--#region Left Buttons Block -->
                     <Border Grid.Column="0" Style="{DynamicResource ZoningBorder}" BorderThickness="0, 0, 1, 0">
                         <StackPanel Style="{DynamicResource RightMenuStackPanel}">
-                            <TextBox Style="{DynamicResource InputTextBox}" Text="{Binding SearchInputText}"/>
+                            <TextBox x:Name="InputTextBox" GotFocus="InputTextBox_GotFocus" LostFocus="InputTextBox_LostFocus" Style="{DynamicResource InputTextBox}" Text="{Binding SearchInputText}"/>
                             <Button x:Name="SearchButton" Command="{Binding SearchButton}" Style="{DynamicResource MenuButton}">Search</Button>
                             <Button x:Name="DownloadButton" Command="{Binding DownloadFileButton}" Style="{DynamicResource MenuButton}">Download</Button>
                             <Button x:Name="UploadButton" Command="{Binding UploadFileButton}" Style="{DynamicResource MenuButton}">Upload</Button>

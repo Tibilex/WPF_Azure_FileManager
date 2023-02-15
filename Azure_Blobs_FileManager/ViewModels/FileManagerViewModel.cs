@@ -43,7 +43,14 @@ namespace Azure_Blobs_FileManager.ViewModels
 
         public string? SearchInputText
         {
-            get => _manager.SearchInputText;
+            get
+            {
+                if (_manager.SearchInputText == null)
+                {
+                    SearchInputText = "Search file...";
+                }
+                return _manager.SearchInputText;
+            }
             set
             {
                 _manager.SearchInputText = value;

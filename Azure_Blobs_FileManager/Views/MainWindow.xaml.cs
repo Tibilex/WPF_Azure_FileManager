@@ -22,6 +22,20 @@ namespace Azure_Blobs_FileManager
             this.DataContext = _viewModel;
         }
 
+        private void InputTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(InputTextBox.Text))
+                InputTextBox.Text = "Search file...";
+        }
+
+        private void InputTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (InputTextBox.Text == "Search file...")
+            {
+                InputTextBox.Text = "";
+            }
+        }
+
         private void DragWindow(object sender, RoutedEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed)
