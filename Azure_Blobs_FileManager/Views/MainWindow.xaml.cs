@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -43,8 +42,11 @@ namespace Azure_Blobs_FileManager
 
         private void ListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-            _viewModel.ListBoxSelectedItem = ListBox.SelectedItem.ToString();
+            if (ListBox.SelectedItem != null)
+            {
+                _viewModel.ListBoxSelectedItem = ListBox.SelectedItem.ToString();
+            }
+           
         }
     }
 }

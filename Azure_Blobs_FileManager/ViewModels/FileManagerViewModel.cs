@@ -1,13 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Windows.Documents;
-using Azure.Storage.Blobs;
 using Azure_Blobs_FileManager.Commands;
 using Azure_Blobs_FileManager.Models;
-using Microsoft.Azure.Storage;
-using Microsoft.Azure.Storage.Blob;
 
 namespace Azure_Blobs_FileManager.ViewModels
 {
@@ -16,6 +10,8 @@ namespace Azure_Blobs_FileManager.ViewModels
         #region Fields
 
         private FileManagerModel _manager;
+        private string _fileText;
+        private string _requestResult;
 
         #endregion
 
@@ -30,31 +26,52 @@ namespace Azure_Blobs_FileManager.ViewModels
             }
         }
 
-        public string ListBoxSelectedItem
+        public string? ListBoxSelectedItem
         {
             set => _manager.FileSelectedItem = value;
         }
 
-        public string RequestResult
+        public string? RequestResult
         {
-            get => _manager.RequestResult;
-            set
+            get => _requestResult;
+            private set
             {
-                _manager.RequestResult = value;
+                _requestResult = value;
                 OnPropertyChanged("RequestResult");
             }
         }
 
+        public string? SearchInputText
+        {
+            get => _manager.SearchInputText;
+            set
+            {
+                _manager.SearchInputText = value;
+                OnPropertyChanged("SearchInputText");
+            }
+        }
+
+        public String? FileText
+        {
+            get => _fileText;
+            set
+            {
+                _fileText = value;
+                OnPropertyChanged("FileText");
+            }
+            
+        }
+        
         #endregion
 
         #region Commands
 
-        public CommandResult ShowAllButton { get; private set; }
-        public CommandResult UploadFileButton { get; private set; }
-        public CommandResult DeleteFileButton { get; private set; }
-        public CommandResult DownloadFileButton { get; private set; }
-        public CommandResult ShowInnerButton { get; private set; }
-        public CommandResult SearchButton { get; private set; }
+        public CommandResult? ShowAllButton { get; private set; }
+        public CommandResult? UploadFileButton { get; private set; }
+        public CommandResult? DeleteFileButton { get; private set; }
+        public CommandResult? DownloadFileButton { get; private set; }
+        public CommandResult? ShowInnerButton { get; private set; }
+        public CommandResult? SearchButton { get; private set; }
 
         #endregion
 
@@ -70,9 +87,32 @@ namespace Azure_Blobs_FileManager.ViewModels
         private void CommandsLoad()
         {
             ShowAllButton = new CommandResult(_manager.GetAllFiles);
-            UploadFileButton = new CommandResult(_manager.UploadFile);
-            DeleteFileButton = new CommandResult(_manager.DeleteFile);
+            UploadFileButton = new CommandResult(UploadFile);
+            DeleteFileButton = new CommandResult(DeleteFile);
             DownloadFileButton = new CommandResult(_manager.DownloadFile);
+            SearchButton = new CommandResult(_manager.SearchFile);
+            ShowInnerButton = new CommandResult(ShowFileInnerText);
+        }
+
+        public void ShowFileInnerText()
+        {
+            _manager.GetFileInnerText();
+            FileText = _manager.FileText;
+        }
+
+        public void UploadFile()
+        {
+            RequestResult = "";
+            _manager.UploadFile();
+            RequestResult = "File upload successfully"; 
+            
+        }
+
+        public void DeleteFile()
+        {
+            RequestResult = "";
+            _manager.DeleteFile();
+            RequestResult = "File delete successfully";
         }
 
         #endregion

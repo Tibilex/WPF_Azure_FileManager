@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Azure_Blobs_FileManager"
+        xmlns:local="clr-namespace:Azure_Blobs_FileManager" 
+xmlns:viewmodels="clr-namespace:Azure_Blobs_FileManager.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:FileManagerViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="650" 
@@ -45,14 +46,14 @@
                     <!--#region Left Buttons Block -->
                     <Border Grid.Column="0" Style="{DynamicResource ZoningBorder}" BorderThickness="0, 0, 1, 0">
                         <StackPanel Style="{DynamicResource RightMenuStackPanel}">
-                            <TextBox Style="{DynamicResource InputTextBox}"></TextBox>
+                            <TextBox Style="{DynamicResource InputTextBox}" Text="{Binding SearchInputText}"/>
                             <Button x:Name="SearchButton" Command="{Binding SearchButton}" Style="{DynamicResource MenuButton}">Search</Button>
                             <Button x:Name="DownloadButton" Command="{Binding DownloadFileButton}" Style="{DynamicResource MenuButton}">Download</Button>
                             <Button x:Name="UploadButton" Command="{Binding UploadFileButton}" Style="{DynamicResource MenuButton}">Upload</Button>
                             <Button x:Name="DeleteButton" Command="{Binding DeleteFileButton}" Style="{DynamicResource MenuButton}">Delete</Button>
                             <Button x:Name="ShowAllButton" Command="{Binding ShowAllButton}" Style="{DynamicResource MenuButton}">Show all</Button>
                             <Button x:Name="ShowInnerButton" Command="{Binding ShowInnerButton}" Style="{DynamicResource MenuButton}">Show inner</Button>
-                            <TextBlock Style="{DynamicResource MainTextBlock}" Text="{Binding RequestResult}" Foreground="{DynamicResource Color.Red}"></TextBlock>
+                            <TextBlock Text="{Binding RequestResult}" Foreground="{StaticResource Color.Red}" Margin="-10 10 0 0" Style="{DynamicResource MainTextBlock}"/>
                         </StackPanel>
                     </Border>
                     <!--#endregion-->
@@ -86,7 +87,7 @@
                                     <Border Grid.Row="0" Style="{DynamicResource ZoningBorder}" BorderThickness="0, 0, 0, 1">
                                         <TextBlock Text="Text inner file" Style="{DynamicResource MainTextBlock}"></TextBlock>
                                     </Border>
-                                    <TextBlock Grid.Row="1" Style="{DynamicResource MainTextBlock}" VerticalAlignment="Top" Margin="0 10 0 0"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="{Binding Path=FileText}" Style="{DynamicResource MainTextBlock}" VerticalAlignment="Top" Margin="0 10 0 0"/>
                                 </Grid>
                             </Border>
                         </Grid>
